@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini AI Chat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.10.0"
+  }
+}
+</script>
+    <style>
+      @keyframes pump {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.4); }
+      }
+      .animate-pump {
+        animation: pump 1s ease-in-out infinite;
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% {
+          opacity: 1;
+          filter: drop-shadow(0 0 2px #3b82f6);
+        }
+        50% {
+          opacity: 0.7;
+          filter: drop-shadow(0 0 6px #3b82f6);
+        }
+      }
+      .animate-pulse-glow {
+        animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+
+      @keyframes fade-in-up {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in-up {
+        animation: fade-in-up 0.15s ease-out forwards;
+      }
+
+      /* Spotlight effect for chat input */
+      .input-spotlight-container {
+        position: relative;
+        overflow: hidden;
+        transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        border: 1px solid #404040; /* Corresponds to border-gray-700/80 */
+      }
+      .input-spotlight-container::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        border-radius: inherit;
+        background: radial-gradient(
+          circle 250px at var(--mouse-x, -999px) var(--mouse-y, -999px),
+          rgba(255, 255, 255, 0.05),
+          transparent 80%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        pointer-events: none; /* Allows clicks to pass through */
+      }
+      .input-spotlight-container:hover::before {
+        opacity: 1;
+      }
+      .input-spotlight-container:focus-within {
+        border-color: #4f46e5; /* A vibrant blue/indigo color */
+        box-shadow: 0 0 0 1px #4f46e5, 0 0 8px rgba(79, 70, 229, 0.3);
+      }
+
+      /* Custom Scrollbar for Webkit browsers */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0d1117; /* Dark background for the track */
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #30363d; /* Gray for the thumb */
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #49515c; /* Lighter gray on hover */
+      }
+    </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-[#171717]">
+    <div id="root"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
